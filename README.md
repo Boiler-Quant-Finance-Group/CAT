@@ -22,11 +22,21 @@ Make sure to follow these steps when making a code change:
 
 1. **Fork the Repository**: Start by forking the CAT repository to your GitHub account.
    (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)
-3. **Create a Branch**: Once you've forked the repo, create a new branch in your fork. This branch should be named appropriately based on the feature or fix you plan to work on.
-4. **Develop and Test**: Implement your feature or fix in your branch. Ensure that you thoroughly test your code and it adheres to the project's standards.
-5. **Create a Pull Request**: After you're satisfied with your work, create a pull request against the main CAT repository. Your pull request should detail the changes you've made and why they are beneficial to the project.
-6. **Code Review**: Wait for a review from the project maintainers. Be open to feedback and ready to make necessary changes.
-7. **Merge**: Once your pull request is approved, it will be merged into the main project.
+2. Git Clone onto your local machine in terminal:
+     cd YOUR_DIRECTORY
+     git clone https://github.com/YOUR_USERNAME/YOUR_FORK.git
+3. Set upstream:
+   git remote add origin https://github.com/Boiler-Quant-Finance-Group/CAT.git
+      following is ok:  > fatal: remote origin already exists.
+5. **Create a Branch**: Once you've forked the repo, create a new branch in your fork. This branch should be named appropriately based on the feature or fix you plan to work on.
+   In terminal on your local machine on your FORKED repo:
+          git checkout -b <your-new-branch-name>
+6. **Develop and Test**: Implement your feature or fix in your branch. Ensure that you thoroughly test your code and it adheres to the project's standards.
+7. **Create a Pull Request**: After you're satisfied with your work, create a pull request against the main CAT repository. Your pull request should detail the changes you've made and why they are beneficial to the project.
+   https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
+   
+9. **Code Review**: Wait for a review from the project maintainers. Be open to feedback and ready to make necessary changes.
+10. **Merge**: Once your pull request is approved, it will be merged into the main project.
 
 ## Getting Started
 
