@@ -23,7 +23,7 @@ Welcome to CAT - the Cryptocurrency Arbitrage Trading Research Project, an initi
 
 ## Contribution Guide
 
-We welcome contributions from enthusiastic individuals who share our passion for quantitative finance and cryptocurrency trading. Here's how you can contribute:
+Make sure to follow these steps when making a code change:
 
 1. **Fork the Repository**: Start by forking the CAT repository to your GitHub account.
 2. **Create a Branch**: Once you've forked the repo, create a new branch in your fork. This branch should be named appropriately based on the feature or fix you plan to work on.
