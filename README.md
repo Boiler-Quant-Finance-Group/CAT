@@ -6,20 +6,15 @@ Welcome to CAT - the Cryptocurrency Arbitrage Trading Research Project, an initi
 
 ### Project Goals
 
-#### Theory
+#### Theory Plan
 - **Stochastic Modeling**: Develop models to represent trading strategies as stochastic processes, starting with a discrete random walk framework.
 - **Bayesian Probability Estimation**: Utilize a Bayesian framework to empirically estimate probabilities, enhancing our decision-making process in the volatile crypto market.
 
-#### Implementation
+#### Implementation Plan
 - **Efficiency through Multithreading**: Optimize query times by implementing multithreaded approaches in our data collection and processing.
 - **Bayesian Estimator Deployment**: Integrate a Bayesian estimator to refine our trading predictions and strategies.
 - **AWS Server Deployment**: Deploy our systems on AWS servers, ensuring optimal colocation for faster and more reliable market data access.
 - **Advanced Numerical Libraries**: Leverage numerical Python libraries to enhance the speed and efficiency of our detection algorithms and backtracking methodologies.
-
-## Technologies Used
-- Python: Our primary programming language for developing algorithms and models.
-- AWS: For hosting our servers and ensuring low-latency access to market data.
-- Numerical Python Libraries: Such as NumPy and Pandas, for efficient data handling and computations.
 
 ## Contribution Guide
 
