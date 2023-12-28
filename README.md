@@ -24,8 +24,10 @@ Make sure to follow these steps when making a code change:
    (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)
 2. Git Clone onto your local machine in terminal:
    /
+   
      cd YOUR_DIRECTORY
    /
+   
         git clone https://github.com/YOUR_USERNAME/YOUR_FORK.git
 4. Set upstream:  /
    git remote add origin https://github.com/Boiler-Quant-Finance-Group/CAT.git
