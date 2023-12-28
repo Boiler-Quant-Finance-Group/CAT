@@ -21,11 +21,12 @@ Welcome to CAT - the Cryptocurrency Arbitrage Trading Research Project, an initi
 Make sure to follow these steps when making a code change:
 
 1. **Fork the Repository**: Start by forking the CAT repository to your GitHub account.
-2. **Create a Branch**: Once you've forked the repo, create a new branch in your fork. This branch should be named appropriately based on the feature or fix you plan to work on.
-3. **Develop and Test**: Implement your feature or fix in your branch. Ensure that you thoroughly test your code and it adheres to the project's standards.
-4. **Create a Pull Request**: After you're satisfied with your work, create a pull request against the main CAT repository. Your pull request should detail the changes you've made and why they are beneficial to the project.
-5. **Code Review**: Wait for a review from the project maintainers. Be open to feedback and ready to make necessary changes.
-6. **Merge**: Once your pull request is approved, it will be merged into the main project.
+   (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)
+3. **Create a Branch**: Once you've forked the repo, create a new branch in your fork. This branch should be named appropriately based on the feature or fix you plan to work on.
+4. **Develop and Test**: Implement your feature or fix in your branch. Ensure that you thoroughly test your code and it adheres to the project's standards.
+5. **Create a Pull Request**: After you're satisfied with your work, create a pull request against the main CAT repository. Your pull request should detail the changes you've made and why they are beneficial to the project.
+6. **Code Review**: Wait for a review from the project maintainers. Be open to feedback and ready to make necessary changes.
+7. **Merge**: Once your pull request is approved, it will be merged into the main project.
 
 ## Getting Started
 
