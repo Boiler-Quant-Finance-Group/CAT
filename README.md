@@ -25,8 +25,7 @@ Make sure to follow these steps when making a code change:
 2. Git Clone onto your local machine in terminal:
      cd YOUR_DIRECTORY
         git clone https://github.com/YOUR_USERNAME/YOUR_FORK.git
-4. Set upstream:
-
+4. Set upstream:  
    git remote add origin https://github.com/Boiler-Quant-Finance-Group/CAT.git
    
       following is ok:  > fatal: remote origin already exists.
