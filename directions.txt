@@ -1,0 +1,62 @@
+Basically we now want to get the exchange rates for the curency from binance api. 
+First need to create a way to get exchange rates from the spot market test networks
+Then create a way from a list of currency to get the best price/ask for all the pairwise currencies in 
+that currency list
+
+We then create an optimal runtime (experimental of course) algorithm for this (fash hash function for hashtables etc)
+we want < 1 ms per currency runtime on average
+Down the line we can do some ML or stat stuff to find the optimal set of starting currencies
+then we can auto filter fast for narrowing down the path quickly and make 🔥🔥🔥
+
+
+After doing more research it seems that there are a couple options:
+1) We can do it on binance with their api normally but limited options for arbtirage
+2) we can do it on binance 2p2 but need a vpn
+3) we can do it across exchanges in general or do it using the convert feature. 
+
+Keeping tracking we signed up for coinbase, crypto.com (not yet), kraken, and binance 
+They all have inner api arbtirage opportunity. 
+Pretty sure they have a convert feature and we can leverage this for the
+
+considering its quite a lenghtly search we should use historical data and math and quick ML to narrow down the path
+detection search scope (after all we have to effieciently find some k pairs)
+
+
+
+10/31: Knowledge update: we know that maker vs taker fees are diff: 
+a maker fee is one where YOU specift the price (ask/bid)
+A taker free is when you just take whats currently available in the order book!
+### For our volume < 50,000USD we have a makers fee of 0.16% per trade... 
+### Goals are to introduce parralism and to actually get correct prices (ask/bid) 
+AND to get order size
+
+To put it together:
+When you engage with the BTC/USD market:
+
+Buying Bitcoin (or "going long" on BTC/USD) at the top ask price means you're accepting a seller's price and purchasing their Bitcoin in exchange for your US Dollars.
+Selling Bitcoin (or "going short" on BTC/USD) at the top bid price means you're accepting a buyer's price and selling your Bitcoin in exchange for US Dollars.
+Remember, the actual trade occurs when a buyer's bid price matches a seller's ask price.
+
+### when going with currency pair:
+say BTC/USD we have BTC -> USD its selling BTC for USD  and USD -> BTC is buying BTC for USD
+#### WE also need to make 0s if the currency pair does not exist ie Monkeycoin/USD is 0 and this isnt an issue 
+
+#### So we should adjust algorithm so that the
+if C1_C2 doesnt exist we try C2_C1 and then add C1_C2 as 1/(C2_C1)
+
+
+Idea for parralims we have the find currencies list 
+### we also need a way to make sure the size is adequate (properly sized)
+#### Then if we select the highest arbtirage and then execute each order with its own thread or submit a list of orders (max 15)
+#### This is HFT arbtirage fire emoji 
+
+current data flow: 
+        1) call get_currencies_list -> from krakendata.excel based on ML it returns a list of lists 
+        this list of lists is a list of currencies (Not trading pairs) (needs to be started)
+        2) given this list of lists used multiple threads to fun entire algorithm for each list of currencies 
+        3) algo -> build_matrix -> get_rates -> algo -> returns % profit adjusted for fees (i think volume is irrelevant
+         (other than in internal sequence doesnt depend on the order volume)) and also returns the sequence of trades
+         which is a dict: {(trading pair): order_type:"limt", price: price, type: "buy/sell}
+                            accesses: dict['type'] -> return -> "buy" for example
+        then execute is called and then executes the trades
+                    
