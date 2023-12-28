@@ -27,8 +27,9 @@ Make sure to follow these steps when making a code change:
         git clone https://github.com/YOUR_USERNAME/YOUR_FORK.git
 4. Set upstream:
 
-     
+         /
    git remote add origin https://github.com/Boiler-Quant-Finance-Group/CAT.git
+   
       following is ok:  > fatal: remote origin already exists.
    
 6. **Create a Branch**: Once you've forked the repo, create a new branch in your fork. This branch should be named appropriately based on the feature or fix you plan to work on.
