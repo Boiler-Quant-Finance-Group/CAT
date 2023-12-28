@@ -36,14 +36,6 @@ We welcome contributions from enthusiastic individuals who share our passion for
 
 To get started with CAT, clone the repository and set up a Python environment with the necessary dependencies. For detailed instructions, refer to our setup guide in the repository.
 
-## Stay Updated
-
-For updates and discussions, join our community on [platform name]. Stay connected with fellow researchers and developers, share ideas, and collaborate on exciting new features.
-
----
-
-We're excited to see your contributions and to collaborate on advancing the field of cryptocurrency arbitrage trading. Happy coding!
-
 ---
 
 *This README is a living document and may be updated as the project evolves.*
