@@ -24,7 +24,7 @@ Make sure to follow these steps when making a code change:
    (https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)
 2. Git Clone onto your local machine in terminal:
    
-
+/
 
      cd YOUR_DIRECTORY
    
