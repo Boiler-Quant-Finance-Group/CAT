@@ -1,4 +1,4 @@
-from CAT.algo import *
+from algo import *
 
 currencies = ['BTC', 'USDT', 'USD']
 

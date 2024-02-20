@@ -2,7 +2,7 @@
 #### approach #1 rates from just 
 
 #### Following is kraken public api 
-from krakenpairs import *
+#from CAT.archived_scripts.krakenpairs import *
 import requests
 import numpy as np
 import itertools
@@ -68,8 +68,7 @@ def get_rates_kraken(count = 100, pairs = [("BTC", "USD")], k=5):
                         ask_prices = np.array([float(ask[0]) for ask in json_dict['result'][crypto_key]['asks']])
                         bid_prices = np.array([float(ask[0]) for ask in json_dict['result'][crypto_key]['bids']])
 
-                    # Use NumPy's partitioning function to get the top k highest ask prices
-                    # This avoids having to sort the entire array
+                   
                         best_k_asks = np.partition(ask_prices, k)[:k]
                         top_k_bids = np.partition(bid_prices, -k)[-k:]
                         average_low_k_asks = best_k_asks.mean()
