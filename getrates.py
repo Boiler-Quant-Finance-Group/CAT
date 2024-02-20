@@ -113,5 +113,5 @@ def build_matrix(count =100, currencies = ["BTC", "USD", "USDT"], num_top_k = 10
             elif (from_currency, to_currency) in rates:
                 rate_matrix[i, j] = rates[(from_currency, to_currency)]
 
-    return rate_matrix, currencies
+    return np.log(np.array(rate_matrix)), currencies
         
