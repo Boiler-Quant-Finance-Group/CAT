@@ -7,6 +7,8 @@
 # print(df['symbol'])
 import itertools
 import os
+import pandas as pd
+
 
 # List of exchanges
 exchanges = ['gateio', 'deribit', 'bitfinex', 'bitmart', 'digifinex', 'kraken', 'bitvavo']
