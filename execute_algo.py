@@ -5,10 +5,10 @@ currencies = ['BTC', 'USDT', 'USD']
 mat, currency_names, = build_matrix(count = 5, currencies=currencies, num_top_k=2)
 
 print(mat)
-log_FX = np.log(np.array(mat))
+# log_FX = np.log(np.array(mat))
 
-three_cycle_arbitrage = detect_arbitrage_with_paths(log_FX, 3)
-k_cycle_arbitrage = detect_arbitrage_with_paths(log_FX, len(currencies))
+three_cycle_arbitrage = detect_arbitrage_with_paths(mat, 3)
+k_cycle_arbitrage = detect_arbitrage_with_paths(mat, len(currencies))
 
 print("3-cycle arbitrage opportunities:", three_cycle_arbitrage)
 print("4-cycle arbitrage opportunities:", k_cycle_arbitrage)
