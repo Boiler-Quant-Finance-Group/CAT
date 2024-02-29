@@ -1,5 +1,6 @@
 import ccxt
 import pandas as pd
+import os
 
 ### This block of code gets exchange info from kraken
 ### This needs to be repeated for the exchanges we chose
@@ -9,10 +10,6 @@ import pandas as pd
 # kraken_df = pd.DataFrame.from_dict(kraken_json, orient='index')
 # kraken_df.to_csv("CAT/exchanges/kraken_df")
 # print(kraken_df.index)
-
-import ccxt
-import pandas as pd
-import os
 
 # List of exchanges
 exchanges = ['binance', 'bitbank', 'gateio', 'deribit', 'bitfinex', 'bitmart', 'bitmex', 'digifinex', 'kraken', 'bitvavo']

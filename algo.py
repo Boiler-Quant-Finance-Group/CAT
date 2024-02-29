@@ -58,7 +58,6 @@ import numpy as np
 from getrates import * 
 from archived_scripts.krakenpairs import *
 import requests
-import numpy as np
 import itertools
 
 def max_plus_product_with_paths(A, B):
