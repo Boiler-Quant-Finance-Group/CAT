@@ -12,18 +12,19 @@ import os
 # print(kraken_df.index)
 
 # List of exchanges
-exchanges = ['binance', 'bitbank', 'gateio', 'deribit', 'bitfinex', 'bitmart', 'bitmex', 'digifinex', 'kraken', 'bitvavo']
+exchanges = ['binance', 'bitbank', 'gateio', 'deribit', 'bitfinex', 'bitmart', 'bitmex', 'digifinex', 'kraken',
+             'bitvavo']
 
 for exchange_name in exchanges:
     # Dynamically create exchange object using ccxt
     exchange_class = getattr(ccxt, exchange_name)()
-    
+
     # Fetch tickers
     try:
         tickers_json = exchange_class.fetch_tickers()
         # Convert to DataFrame
         tickers_df = pd.DataFrame.from_dict(tickers_json, orient='index')
-        
+
         # Create directory if it doesn't exist
         print(tickers_df)
         directory = f"CAT/exchanges/{exchange_name}_df"
@@ -31,9 +32,7 @@ for exchange_name in exchanges:
 
         # Save to CSV
         tickers_df.to_csv(f"{directory}")
-        
+
         print(f"Data for {exchange_name} saved. Index: {tickers_df.index}")
     except Exception as e:
         print(f"Could not fetch data for {exchange_name}: {str(e)}")
-
-
