@@ -1,6 +1,6 @@
 from algo import *
 
-currencies = ['BTC', 'USDT', 'USD']
+currencies = ['BTC', 'USDT', 'USD', 'EUR', 'ETH', 'LTC']
 
 mat, currency_names, = build_matrix(count = 5, currencies=currencies, num_top_k=2)
 
@@ -33,3 +33,5 @@ for node, data in k_cycle_arbitrage.items():
     for trade in trades_from_path(data['path'], currency_names):
         print(" -> ", trade)
     print(f"Return: {data['return']*100:.6f}%\n")
+    
+    
