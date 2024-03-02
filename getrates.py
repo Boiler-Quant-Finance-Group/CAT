@@ -7,6 +7,8 @@
 import requests
 import numpy as np
 import itertools
+import ccxt
+import numpy as np
 
 
 #### get all currencies -> then filter to a certain number of currencies by some metric(s) -> we should be getting a list of currencies -> then query the pairs -> build matrix -? 
@@ -22,66 +24,37 @@ def kraken_request(cur1, cur2, count):
     
     return dict(resp.json())
     
+def get_rates_generic(exchange_id='kraken', count=100, pairs=[("BTC", "USD")], k=5):
+    # Ensure the exchange ID is supported by CCXT
+    assert exchange_id in ccxt.exchanges, f"{exchange_id} is not supported by CCXT."
+    
+    # Initialize the exchange
+    exchange = getattr(ccxt, exchange_id)()
+    
+    data_final = {}
+    for cur1, cur2 in pairs:
+        symbol = f"{cur1}/{cur2}"  # Format the symbol as expected by CCXT
+        
+        # Fetch the order book for the symbol
+        order_book = exchange.fetch_order_book(symbol, limit=count)
+        
+        # Extract ask and bid prices
+        ask_prices = np.array([ask[0] for ask in order_book['asks']])
+        bid_prices = np.array([bid[0] for bid in order_book['bids']])
+        
+        # Calculate the averages of the top k asks and bids
+        best_k_asks = np.partition(ask_prices, k)[:k]
+        top_k_bids = np.partition(bid_prices, -k)[-k:]
+        
+        average_low_k_asks = best_k_asks.mean()
+        average_top_k_bids = top_k_bids.mean()
+        
+        # Store the results
+        data_final[(cur1, cur2)] = average_low_k_asks
+        data_final[(cur2, cur1)] = 1 / average_top_k_bids  # Inverse of average top k bids for reverse pair
+        
+    return data_final
 
-def get_rates_kraken(count = 100, pairs = [("BTC", "USD")], k=5):
-        data_final = {}
-        data_set = set()
-        ### for each currency in pairs return the average of the kth highest asks and return a 
-        for cur1, cur2 in pairs:
-            print("this is dataset:", data_set)
-            if (cur1 + cur2) not in data_set:
-                json_dict = kraken_request(cur1=cur1, cur2=cur2, count=count)
-                if 'result' in json_dict.keys():
-                    crypto_key = next(iter(json_dict['result']))
-                    ask_prices = np.array([float(ask[0]) for ask in json_dict['result'][crypto_key]['asks']])
-                    bid_prices = np.array([float(ask[0]) for ask in json_dict['result'][crypto_key]['bids']])
-
-                    # Use NumPy's partitioning function to get the top k highest ask prices
-                    # This avoids having to sort the entire array
-
-                    best_k_asks = np.partition(ask_prices, k)[:k]
-                    
-                    
-                    top_k_bids = np.partition(bid_prices, -k)[-k:]
-                    
-
-# Calculate the average of the top k prices
-                    average_low_k_asks = best_k_asks.mean()
-                    average_top_k_bids = top_k_bids.mean()
-                    
-                    data_final[(cur1, cur2)] = average_low_k_asks
-                    data_final[(cur2, cur1)] = 1/average_top_k_bids
-                    # data_final[(cur2, cur1)] = 1/average_low_k_asks
-                    
-                    data_set.add(cur1+cur2)
-                    data_set.add(cur2+cur1)
-                    
-                    ###BTC/USD -> good,
-                    #### code addds btc/usd and usd/btc 
-                    ### we do not want to query again 
-                    ### as usd/btc is in this pairwise list 
-                    ### MK/USD
-                    ### USD/MK both do not exist 
-            if (cur2+cur1) not in data_set:
-                    json_dict = kraken_request(cur1=cur2, cur2=cur1, count=count)
-                    if 'result' in json_dict.keys():
-                        crypto_key = next(iter(json_dict['result']))
-                        ask_prices = np.array([float(ask[0]) for ask in json_dict['result'][crypto_key]['asks']])
-                        bid_prices = np.array([float(ask[0]) for ask in json_dict['result'][crypto_key]['bids']])
-
-                   
-                        best_k_asks = np.partition(ask_prices, k)[:k]
-                        top_k_bids = np.partition(bid_prices, -k)[-k:]
-                        average_low_k_asks = best_k_asks.mean()
-                        average_top_k_bids = top_k_bids.mean()
-                    
-                        data_final[(cur2, cur1)] = average_low_k_asks
-                        data_final[(cur1, cur1)] = 1/average_top_k_bids
-                        data_set.add(cur2+cur1)
-                        data_set.add(cur1+cur2)
-                    
-                
-        return data_final
                 
 
 ### Function takes in a list of tradable currency pairs then returns the kth highest ask price
