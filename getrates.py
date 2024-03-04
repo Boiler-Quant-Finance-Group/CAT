@@ -14,15 +14,15 @@ import numpy as np
 #### get all currencies -> then filter to a certain number of currencies by some metric(s) -> we should be getting a list of currencies -> then query the pairs -> build matrix -? 
 #### Then run the detection algorithm
 
-def kraken_request(cur1, cur2, count):
-    request_string = "https://api.kraken.com/0/public/Depth?pair="
-    full_request_string = request_string + cur1 + cur2 + "&count=" + str(count)
+# def kraken_request(cur1, cur2, count):
+#     request_string = "https://api.kraken.com/0/public/Depth?pair="
+#     full_request_string = request_string + cur1 + cur2 + "&count=" + str(count)
                 
-    resp = requests.get(full_request_string)
-    print("This is request stirng:", full_request_string)
-    print("This is response:", resp.json())
+#     resp = requests.get(full_request_string)
+#     print("This is request stirng:", full_request_string)
+#     print("This is response:", resp.json())
     
-    return dict(resp.json())
+#     return dict(resp.json())
     
 def get_rates_generic(exchange_id='kraken', count=100, pairs=[("BTC", "USD")], k=5):
     # Ensure the exchange ID is supported by CCXT
@@ -65,7 +65,7 @@ def build_matrix(count =100, currencies = ["BTC", "USD", "USDT"], num_top_k = 10
     currency_pairs = list(itertools.combinations(currencies, 2))
     print("currency pairs:",  currency_pairs)
     
-    rates = (get_rates_kraken(count = count, pairs=currency_pairs, k = num_top_k))
+    rates = (get_rates_generic(count = count, pairs=currency_pairs, k = num_top_k))
 
 # Create a square matrix filled with zeros
     #currencies = list(set([currency for pair in rates.keys() for currency in pair]))
