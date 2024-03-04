@@ -1,5 +1,3 @@
-import ccxt
-import pandas as pd
 
 ### This block of code gets exchange info from kraken
 ### This needs to be repeated for the exchanges we chose
@@ -15,7 +13,7 @@ import pandas as pd
 import os
 
 # List of exchanges
-exchanges = ['binance', 'bitbank', 'gateio', 'deribit', 'bitfinex', 'bitmart', 'bitmex', 'digifinex', 'kraken', 'bitvavo']
+exchanges = ['binance', 'bitbank', 'gateio', 'deribit', 'bitfinex', 'bitmart', 'digifinex', 'kraken', 'bitvavo']
 
 for exchange_name in exchanges:
     # Dynamically create exchange object using ccxt
@@ -27,13 +25,17 @@ for exchange_name in exchanges:
         # Convert to DataFrame
         tickers_df = pd.DataFrame.from_dict(tickers_json, orient='index')
         
+        
         # Create directory if it doesn't exist
-        print(tickers_df)
-        directory = f"CAT/exchanges/{exchange_name}_df"
+        print("THIS is exxchange name:" + exchange_name, tickers_df)
+        directory = f"CAT/exchanges"
+        file_path = f"{directory}/{exchange_name}_df.csv"
+        # if not os.path.exists(directory):
+        #     os.makedirs(directory)
         print("directory", directory)
 
         # Save to CSV
-        tickers_df.to_csv(f"{directory}")
+        tickers_df.to_csv(f"{file_path}")
         
         print(f"Data for {exchange_name} saved. Index: {tickers_df.index}")
     except Exception as e:
