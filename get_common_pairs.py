@@ -1,54 +1,32 @@
-
-# import pandas as pd
-# exchanges = ['gateio', 'deribit', 'bitfinex', 'bitmart', 'digifinex', 'kraken', 'bitvavo']
-# exchange_path = "CAT/exchanges/" + exchanges[5] + "_df"
-# print(exchange_path)
-# df = pd.read_csv(exchange_path)
-# print(df['symbol'])
-import itertools
-import os
 import pandas as pd
+import itertools
 
 
-# List of exchanges
-exchanges = ['gateio', 'deribit', 'bitfinex', 'bitmart', 'digifinex', 'kraken', 'bitvavo']
+
+exchanges = ['gateio', 'bitfinex', 'bitmart', 'digifinex', 'kraken', 'bitvavo']
 exchange_path = "CAT/exchanges/"
+exchange_save_path = "CAT/exchanges_intersection/"
 
-# Function to load data and find intersection of 'symbol' column
-def find_intersection(exchange_combination):
-    # Load the CSV files for all exchanges in the combination
-    dfs = [pd.read_csv(exchange_path + exchange + "_df.csv") for exchange in exchange_combination]
-    
-    # Find the intersection of the 'symbol' column for all DataFrames
-    intersection = set(dfs[0]['symbol'])
-    for df in dfs[1:]:
-        intersection = intersection.intersection(set(df['symbol']))
-    
-    return intersection
+def find_intersection(exchange_combo):
+    for exchange_group in exchange_combo:
+        df_1 = pd.read_csv(exchange_path + exchange_group[0] + "_df.csv")
+        symbols1 = list(df_1['symbol'])     
+        intersection_set = set(list(symbols1))
+        table_name = '_'.join(exchange_group)
+        for exchange in list(exchange_group):
+            df = pd.read_csv(exchange_path + exchange + "_df.csv")
+            symbols_local = list(df['symbol'])
+            intersection_set = intersection_set.intersection(list(symbols_local))
+        
+        df_to_save = pd.DataFrame(intersection_set, columns=['symbol'])
+        df_to_save.to_csv(exchange_save_path + table_name + "_intersection.csv")
 
-# Dictionary to store the intersections
-intersections = {}
+for r in range(2, len(exchanges) + 1):
+    exchange_combo = list(itertools.combinations(exchanges, r))
+    find_intersection(exchange_combo)
 
-# Find all combinations for 7 choose 1 to 7 choose 7
-for r in range(1, 8):
-    for exchange_combination in itertools.combinations(exchanges, r):
-        # Find intersection
-        intersection_symbols = find_intersection(exchange_combination)
-        # Create a table name based on the combination
-        table_name = '_'.join(exchange_combination)
-        # Store the intersection in the dictionary
-        intersections[table_name] = intersection_symbols
 
-# Now `intersections` contains all the intersections
-# To access the intersection for a specific combination, use:
-# intersections['exchange1_exchange2_...']
-
-# If you want to save these intersections to CSV files:
-for table_name, symbols in intersections.items():
-    # Convert the set of symbols to a DataFrame
-    df_symbols = pd.DataFrame(list(symbols), columns=['symbol'])
-    # Save to a CSV file
-    df_symbols.to_csv(exchange_path + table_name + "_intersection.csv", index=False)
-
-# Print out an example
-print(intersections['gateio_deribit_bitfinex'])
+##psuecocode:
+    #for each r 1 to 6
+        # for each exchange grouping
+        #
