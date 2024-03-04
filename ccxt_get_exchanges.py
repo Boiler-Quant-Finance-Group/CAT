@@ -1,7 +1,6 @@
 import ccxt
 import pandas as pd
 
-### This block of code gets exchange info from kraken
 ### This needs to be repeated for the exchanges we chose
 
 # kraken = ccxt.kraken()
