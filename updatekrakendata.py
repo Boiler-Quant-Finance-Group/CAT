@@ -7,7 +7,7 @@
 import requests
 import pandas as pd
 import numpy as np
-from CAT.archived_scripts.krakenpairs import *
+from archived_scripts.krakenpairs import *
 import openpyxl
 
 

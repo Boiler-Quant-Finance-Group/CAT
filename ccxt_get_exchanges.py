@@ -8,17 +8,13 @@
 # kraken_df.to_csv("CAT/exchanges/kraken_df")
 # print(kraken_df.index)
 
-import ccxt
-import pandas as pd
-import os
-
 # List of exchanges
 exchanges = ['binance', 'bitbank', 'gateio', 'deribit', 'bitfinex', 'bitmart', 'digifinex', 'kraken', 'bitvavo']
 
 for exchange_name in exchanges:
     # Dynamically create exchange object using ccxt
     exchange_class = getattr(ccxt, exchange_name)()
-    
+
     # Fetch tickers
     try:
         tickers_json = exchange_class.fetch_tickers()
@@ -40,5 +36,3 @@ for exchange_name in exchanges:
         print(f"Data for {exchange_name} saved. Index: {tickers_df.index}")
     except Exception as e:
         print(f"Could not fetch data for {exchange_name}: {str(e)}")
-
-
