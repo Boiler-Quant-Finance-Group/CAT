@@ -114,7 +114,7 @@ def queryTimeSeries(exchange_name):
             break
 
 # Number of rows to collect and interval
-row_num = 5
+row_num = 1000
 interval = 5  # Number of seconds intervals
 
 # Main function to start threads for each exchange
