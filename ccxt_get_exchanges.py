@@ -9,7 +9,10 @@
 # print(kraken_df.index)
 
 # List of exchanges
-exchanges = ['binance', 'bitbank', 'gateio', 'deribit', 'bitfinex', 'bitmart', 'digifinex', 'kraken', 'bitvavo']
+# exchanges = ['binance', 'bitbank', 'gateio', 'deribit', 'bitfinex', 'bitmart', 'digifinex', 'kraken', 'bitvavo']
+import ccxt
+import pandas as pd
+exchanges = ['bequant', 'bitcoincom', 'hitbtc', 'hitbtc3', 'hollaex', 'oceanex', 'upbit']
 
 for exchange_name in exchanges:
     # Dynamically create exchange object using ccxt
@@ -18,21 +21,23 @@ for exchange_name in exchanges:
     # Fetch tickers
     try:
         tickers_json = exchange_class.fetch_tickers()
+        
         # Convert to DataFrame
         tickers_df = pd.DataFrame.from_dict(tickers_json, orient='index')
-        
+        tickers_df.sort_values(by=['baseVolume'], inplace=True, ascending=False)
         
         # Create directory if it doesn't exist
-        print("THIS is exxchange name:" + exchange_name, tickers_df)
-        directory = f"CAT/exchanges"
+        #print("THIS is exxchange name:" + exchange_name, tickers_df)
+        directory = f"exchanges"
         file_path = f"{directory}/{exchange_name}_df.csv"
         # if not os.path.exists(directory):
         #     os.makedirs(directory)
-        print("directory", directory)
+        #print("directory", directory)
+        print(file_path)
 
         # Save to CSV
         tickers_df.to_csv(f"{file_path}")
         
-        print(f"Data for {exchange_name} saved. Index: {tickers_df.index}")
+        #print(f"Data for {exchange_name} saved. Index: {tickers_df.index}")
     except Exception as e:
         print(f"Could not fetch data for {exchange_name}: {str(e)}")
