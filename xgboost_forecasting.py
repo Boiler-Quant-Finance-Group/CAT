@@ -23,11 +23,11 @@ def forecast(data: pandas.DataFrame, column: str, key: str):
 
     # Split data into training and testing sets
     train_size = int(0.8 * len(df))
-    X_train, X_test = X[:train_size], X[train_size:]
-    y_train, y_test = y[:train_size], y[train_size:]
+    X_train, X_test = X[:train_size - 1], X[train_size:len(X)-1]
+    y_train, y_test = y[1:train_size], y[train_size+1:]
 
     # Initialize and train XGBoost model
-    model = XGBRegressor()
+    model = XGBRegressor(eta=0.3)
     model.fit(X_train, y_train)
     plt.axes(plot_importance(model, max_num_features=5))
     plt.show()
@@ -64,4 +64,4 @@ if __name__ == '__main__':
         df[col] = df[col].apply(literal_eval)
 
     # Change the column name and key here
-    forecast(df, 'BNB/USDT:USDT', 'mean_ask_price')
+    forecast(df, 'ETH/TUSD', 'mean_ask_price')
